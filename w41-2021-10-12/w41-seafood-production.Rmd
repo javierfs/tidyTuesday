@@ -60,19 +60,18 @@ production <- tuesdata$`seafood-and-fish-production-thousand-tonnes`
 
 
 ```{r}
+#Discarding continents and regions: assuming they are aggregates of countries
 top_production_entities_fish_type <- production  %>% 
   filter(!Entity %in% c('Americas', 'Asia', 'Europe', 'Eastern Asia', 'European Union', 'South Eastern Asia', 'Southern Europe', 'Northern Europe', 'Eastern Europe', 'Northern America', 'World', 'Africa', 'Southern Asia', 'Net Food Importing Developing Countries', 'Low Income Food Deficit Countries', 'Least Developed Countries', 'South America','Indonesia', 'USSR', 'Eastern Africa', 'Europe, Western', 'Land Locked Developing Countries')) %>% 
   pivot_longer(4:last_col(), names_to = "fish", values_to = "tonnes")  %>% 
   janitor::clean_names() %>% 
   mutate(
-    # Extract seafood names from column names
-    fish = str_extract(fish, "(?<=lent - ).+(?= - 27)"),
+    fish = str_extract(fish, "(?<=lent - ).+(?= - 27)"), # Extract seafood names from column names
     fish = str_remove(fish, ",.+")) %>% 
   group_by(entity) %>% 
   summarise(median_production_tonnes = median(tonnes)) %>% 
-  group_by(fish) %>% 
   top_n(5, median_production_tonnes) %>% 
-  arrange(fish, desc(median_production_tonnes))
+  arrange(desc(median_production_tonnes))
 
 top_production_year_fish_type <- production %>% 
   pivot_longer(4:last_col(), names_to = "fish", values_to = "tonnes")  %>% 
@@ -81,7 +80,7 @@ top_production_year_fish_type <- production %>%
     # Extract seafood names from column names
     fish = str_extract(fish, "(?<=lent - ).+(?= - 27)"),
     fish = str_remove(fish, ",.+")) %>% 
-  merge(top_production_entities_fish_type, by= c('entity','fish'))
+  merge(top_production_entities_fish_type, by= c('entity'))
 
 
 
@@ -90,33 +89,8 @@ top_production_year_fish_type <- production %>%
 ```
 
 ```{r}
-pal1 <- c('#962D98', '#263A72', '#066A4E' ,'#019672', '#05BBBC')
-pal2 <- darken(pal1,0.2)
-pal <-  c(rbind(pal1, pal2))
-bg <- "#3b706d" 
-
-f1b <- "Publico Headline Bold"
-f2 <- "Proxima Nova"
-f2b <- "Proxima Nova Bold"
-f2bb <- "Proxima Nova Extrabold"
-
-gr1 <- "grey85"
-gr2 <- "grey97"
-
-
-pal <- wes_palette("Zissou1", length(unique(top_production_year_fish_type$entity)), type = "continuous")
-
-
-# `x11()` on Linux, or `quartz()` on Mac OS
-# quartz()
-
-# load fonts - every session
-
-
-font_import()
-loadfonts()
-
-countries <- c("Bangladesh","Chile","China","Denmark","France","India","Japan","Myanmar",'Norway',"Peru","Russia" ,"South Korea" ,"Spain","Taiwan","Thailand","United States","Vietnam") 
+pal1 <- c('#14505C', '#2A7979', '#4CA38F', '#81CA9F','#C7E5BE')
+countries <- c("China","India","Japan","Thailand","United States") 
 
 g <- top_production_year_fish_type %>%
   mutate(year= as.Date(ISOdate(year, 1, 1)),
@@ -131,77 +105,62 @@ g <- top_production_year_fish_type %>%
               n_grid = 1000, 
               bw = .75,
               lwd = 0) +
-  geom_stream_label(size = rel(8), 
-                    type = "mirror",
-                    hjust = -.05,
-                   color = 'white',
-                    family= "montserrat",
-                   sorting = 'onset')+
   facet_wrap(~fish , 
              ncol = 1, 
              scales = "free_y",
              strip.position = 'left')+
   cowplot::theme_minimal_vgrid(font_size = 18) +
-  annotate("text", 
-           x = as.Date("1995-01-01"), 
-           label='Japan', 
-           y = 80000, 
-           color = 'white', 
-           family = 'montserrat',
-           size=rel(8)) +
-  annotate("text", 
-           x = as.Date("1995-01-01"), 
-           label='South Korea', 
-           y = 65000, 
-           color = 'white', 
-           family = 'montserrat',
-           size=rel(8)) +
-  
-  
-  
   theme(legend.position = "none") +
-  scale_colour_manual(values = pal %>% colorspace::darken(.8)) +
-  scale_fill_manual(values = pal) +
+  scale_colour_manual(values = pal1 %>% colorspace::darken(.8)) +
+  scale_fill_manual(values = pal1) +
   scale_y_continuous(labels = label_number_si(), position = "right")+ 
   scale_x_date(breaks = seq(as.Date("1960-01-01"), as.Date("2013-01-01"), by="10 years"), 
                date_labels = "%Y") +
   theme_minimal()+
-  theme(legend.position = "left", 
-        plot.background = element_rect(fill = bg, color = NA),
-        panel.grid.major.x = element_line(size = 0.5, color = lighten(bg, 0.1)),
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal", 
+        legend.box = "horizontal",
+        legend.title = element_blank(),
+        legend.text = element_text(size=rel(3)),
+        plot.background = element_rect(fill = '#F6FBF4', color = NA),
+        panel.grid.major.x = element_line(size = 0.3, color = lighten(bg, 0.1)),
         panel.grid.major.y = element_blank(),
         panel.border = element_blank(),
         panel.grid.minor = element_blank(),
         text = element_text(family = "bebas-neue",
-                            color = 'white'),
+                            color = 'black'),
         plot.title = element_text(size = rel(7.5), 
-                                  color = 'white',
+                                  color = 'black',
                                   family= "bebas-neue",
                                   hjust = 0.5),
         plot.subtitle = element_text(size = rel(5), 
-                                     color = 'white',
+                                     color = 'black',
                                      family= "bebas-neue",
                                      hjust = 0.5),
-        plot.caption = element_text(size = rel(1.5), 
-                                     color = 'white',
+        plot.caption = element_text(size = rel(2), 
+                                     color = 'black',
                                      family= "montserrat",
                                      ),
-        strip.text.y = element_text(size = rel(2.5), 
-                                     color = 'white',
+        strip.text.y = element_text(size = rel(3.5), 
+                                     color = 'black',
                                      family= "montserrat"),
         axis.text.x = element_text(size=rel(3),
-                                    color = 'white',
+                                    color = 'black',
                                     family = 'montserrat'),
         axis.text.y = element_text(size=rel(2),
-                                    color = 'white',
+                                    color = 'black',
                                     family = 'montserrat'),
         axis.title.y = element_blank(),
         axis.title.x = element_blank()
         )+
+  guides(color = guide_legend(title.position = "bottom", 
+                              # hjust = 0.5 centres the title horizontally
+                              title.hjust = 0.5,
+                              label.position = "bottom")) +
    labs(
-      title = "Top fish species production countries",
+      title = "Top production countries: fish species",
       subtitle = "1960 - 2013",
-      caption = "@javierfs | Data Source: OurWorldinData.org "
+      caption = "Production measured in tonnes | made by: @javierfs | Data Source: OurWorldinData.org "
    
     ) 
 
