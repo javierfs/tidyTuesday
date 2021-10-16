@@ -121,7 +121,7 @@ g <- top_production_year_fish_type %>%
         legend.direction = "horizontal", 
         legend.box = "horizontal",
         legend.title = element_blank(),
-        legend.text = element_text(size=rel(3)),
+        legend.text = element_text(size=rel(1.5)),
         plot.background = element_rect(fill = '#F6FBF4', color = NA),
         panel.grid.major.x = element_line(size = 0.3, color = lighten(bg, 0.1)),
         panel.grid.major.y = element_blank(),
@@ -129,22 +129,22 @@ g <- top_production_year_fish_type %>%
         panel.grid.minor = element_blank(),
         text = element_text(family = "bebas-neue",
                             color = 'black'),
-        plot.title = element_text(size = rel(7.5), 
+        plot.title = element_text(size = rel(4.5), 
                                   color = 'black',
                                   family= "bebas-neue",
                                   hjust = 0.5),
-        plot.subtitle = element_text(size = rel(5), 
+        plot.subtitle = element_text(size = rel(3), 
                                      color = 'black',
                                      family= "bebas-neue",
                                      hjust = 0.5),
-        plot.caption = element_text(size = rel(2), 
+        plot.caption = element_text(size = rel(1), 
                                      color = 'black',
                                      family= "montserrat",
                                      ),
-        strip.text.y = element_text(size = rel(3.5), 
+        strip.text.y = element_text(size = rel(2.5), 
                                      color = 'black',
                                      family= "montserrat"),
-        axis.text.x = element_text(size=rel(3),
+        axis.text.x = element_text(size=rel(2.5),
                                     color = 'black',
                                     family = 'montserrat'),
         axis.text.y = element_text(size=rel(2),
@@ -165,7 +165,7 @@ g <- top_production_year_fish_type %>%
     ) 
 
 
-ggsave(here::here('w41-2021-10-12', "plots", paste0("w41_globalfish-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".png")), dpi = 320, height = 12, width = 8)
+ggsave(here::here('w41-2021-10-12', "plots", paste0("w41_globalfish-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".png")), dpi = 320, height = 8, width = 4)
 
   
 ```
