@@ -118,12 +118,13 @@ g <- top_production_year_fish_type %>%
                date_labels = "%Y") +
   theme_minimal()+
   theme(legend.position = "bottom",
-        legend.direction = "horizontal", 
+        legend.direction = "horizontal",
+        legend.key.size =unit(rel(.5), "cm"),
         legend.box = "horizontal",
         legend.title = element_blank(),
         legend.text = element_text(size=rel(1.5)),
         plot.background = element_rect(fill = '#F6FBF4', color = NA),
-        panel.grid.major.x = element_line(size = 0.3, color = lighten(bg, 0.1)),
+        panel.grid.major.x = element_line(size = 0.15, color = lighten('#14505C', 0.3)),
         panel.grid.major.y = element_blank(),
         panel.border = element_blank(),
         panel.grid.minor = element_blank(),
@@ -165,7 +166,7 @@ g <- top_production_year_fish_type %>%
     ) 
 
 
-ggsave(here::here('w41-2021-10-12', "plots", paste0("w41_globalfish-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".png")), dpi = 320, height = 8, width = 4)
+ggsave(here::here('w41-2021-10-12', "plots", paste0("w41_globalfish-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".png")), dpi = 320, height = 6, width = 4)
 
   
 ```
