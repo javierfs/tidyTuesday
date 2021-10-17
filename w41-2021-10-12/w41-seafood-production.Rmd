@@ -142,7 +142,7 @@ g <- top_production_year_fish_type %>%
                                      color = 'black',
                                      family= "montserrat",
                                      ),
-        strip.text.y = element_text(size = rel(2.5), 
+        strip.text.y = element_text(size = rel(2), 
                                      color = 'black',
                                      family= "montserrat"),
         axis.text.x = element_text(size=rel(2.5),
