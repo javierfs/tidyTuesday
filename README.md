@@ -14,6 +14,13 @@
 
 My contributions to the [#TidyTuesday challenge](https://github.com/rfordatascience/tidytuesday), a weekly social data project that focusses on understanding how to summarize and arrange data to make meaningful and/or beautiful charts with `{ggplot2}`, `{tidyr}`, `{dplyr}` and other tools that are part of the [`{tidyverse}`](https://www.tidyverse.org/) ecosystem. The project was founded in 2018 by [Thomas Mock](https://thomasmock.netlify.com/) and organized by the [R4DS ("`R` for Data Science") online learning community](https://twitter.com/r4dscommunity). The intent is to provide a safe and supportive forum to practice their wrangling and data visualization skills.  
 
+***
+
+### [2021/43](https://github.com/javierfs/tidyTuesday/tree/main/w43-2021-10-19)🎃 [BigPumpkins.com]http://www.bigpumpkins.com/)
+
+![./plots/pumpkins.png](https://https://github.com/javierfs/tidyTuesday/blob/main/w43-2021-10-19/w43-giant-pumpkins_files/figure-gfm/showing%20viz-1.png)
+
+***
 
 ***
 
@@ -24,10 +31,4 @@ My contributions to the [#TidyTuesday challenge](https://github.com/rfordatascie
 ***
 
 
-***
 
-### [2021/43](https://github.com/javierfs/tidyTuesday/tree/main/w43-2021-10-19)🎃 [BigPumpkins.com]http://www.bigpumpkins.com/)
-
-![./w43-giant-pumpkins_files/figure-gfm/showing viz-1.png](https://https://github.com/javierfs/tidyTuesday/blob/main/w43-2021-10-19/w43-giant-pumpkins_files/figure-gfm/showing%20viz-1.png)
-
-***
