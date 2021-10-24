@@ -22,3 +22,12 @@ My contributions to the [#TidyTuesday challenge](https://github.com/rfordatascie
 ![./plots/w41_globalfish-20211017_173523.png](https://github.com/javierfs/tidyTuesday/blob/main/w41-2021-10-12/plots/w41_globalfish-20211017_173523.png)
 
 ***
+
+
+***
+
+### [2021/43](https://github.com/javierfs/tidyTuesday/tree/main/w43-2021-10-19)🎃 [BigPumpkins.com]http://www.bigpumpkins.com/)
+
+![./w43-giant-pumpkins_files/figure-gfm/showing viz-1.png](https://https://github.com/javierfs/tidyTuesday/blob/main/w43-2021-10-19/w43-giant-pumpkins_files/figure-gfm/showing%20viz-1.png)
+
+***
